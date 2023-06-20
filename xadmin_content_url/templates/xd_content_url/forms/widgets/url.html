@@ -1,0 +1,12 @@
+
+<div class="input-group">
+  <span class="input-group-prepend">
+    <button type="button" class="btn btn-secondary btn_{{ widget.name }}">
+      <i class="fa fa-external-link" aria-hidden="true"></i> Selecionar
+    </button>
+  </span>
+  {% include widget.base_template_name %}
+  <input type="{{ widget.sel.type }}" name="sel_{{ widget.name }}"{% if widget.sel.value != None %}
+         value="{{ widget.sel.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}
+         readonly>
+</div>
