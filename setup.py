@@ -9,6 +9,7 @@ setup(
 		'xadmin_content_url.forms'
 	],
 	url='https://github.com/alexsilva/xadmin-content-url',
+	include_package_data=True,
 	license='MIT',
 	author='alex',
 	author_email='',
