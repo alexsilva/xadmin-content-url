@@ -26,7 +26,7 @@ class XdContentUrl(models.Model):
 	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
 	content_object = GenericForeignKey("content_type", "object_id")
 
-	url = models.OneToOneField(XdUrl, on_delete=models.CASCADE)
+	url = models.ForeignKey(XdUrl, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return str(self.url)
