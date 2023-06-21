@@ -8,6 +8,8 @@ class XdContentUrlInput(TextInput):
 	@staticmethod
 	def simple_model_format(qs):
 		items = []
+		if not qs:
+			return ''
 		for obj in qs:
 			url = obj.url
 			items.append(f"{url.content_type.app_label}:{url.content_type.model}:{url.object_id}")
@@ -15,6 +17,8 @@ class XdContentUrlInput(TextInput):
 
 	@staticmethod
 	def simple_model_string(qs):
+		if not qs:
+			return ''
 		items = [str(o) for o in qs]
 		return ','.join(items)
 
