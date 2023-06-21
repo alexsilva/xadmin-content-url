@@ -1,8 +1,14 @@
+import django.forms as django_forms
 from xadmin.views import BaseAdminPlugin
 
 
 class XdContentUrlAdminPlugin(BaseAdminPlugin):
-	xd_content_url = False
 
 	def init_request(self, *args, **kwargs):
-		return bool(self.xd_content_url)
+		return True
+
+	def get_media(self, media):
+		media += django_forms.Media(js=[
+			"xd_content_url/js/xd_sel_url.js"
+		])
+		return media
