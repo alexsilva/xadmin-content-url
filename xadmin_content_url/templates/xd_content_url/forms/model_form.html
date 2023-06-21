@@ -1,6 +1,14 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 <form>
-  {% crispy form %}
-  <button type="button" class="btn btn-secondary btn-content-select">{% trans "Search" %}</button>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-8">
+        {% crispy form %}
+      </div>
+      <div class="col-sm-2">
+        <button type="button" class="btn btn-secondary btn-content-select">{% trans "Search" %}</button>
+      </div>
+    </div>
+  </div>
 </form>
