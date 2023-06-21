@@ -21,14 +21,18 @@ class XdContentUrlField(GenericRelation):
 			object_id=instance.pk,
 			url=url
 		)[0]
+		return obj
 
 	def save_form_data(self, instance, data: list):
 		"""data: [(object_id, content_type),...]"""
 		if not data:
 			return
+		objs = []
 		for item in data:
-			self.xd_save_form_data(instance, *item)
+			obj = self.xd_save_form_data(instance, *item)
+			objs.append(obj.pk)
 			break
+		self.remote_field.model.objects.exclude(pk__in=objs).delete()
 
 	def value_from_object(self, obj):
 		"""Return the value of this field in the given model instance."""
