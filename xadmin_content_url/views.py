@@ -18,7 +18,7 @@ class ContentUrlAdminView(BaseAdminView):
 
 	def get(self, request, **kwargs):
 		helper = self.get_helper()
-		form = self.form_class()
+		form = self.form_class(prefix='xdm')
 		form.helper = helper
 		context = {
 			'form': form
