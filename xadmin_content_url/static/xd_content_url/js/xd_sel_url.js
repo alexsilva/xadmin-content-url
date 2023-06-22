@@ -46,12 +46,13 @@ $(function () {
             $sel = $form.find("#id_xdm-content"),
             content = $sel.val(),
             url = Urls["xadmin:" + content.replace(".", "_") + "_rest"](),
-            $table = $form.find("table.xdm_ct_url_table");
+            $table = $form.find("table.xdm_ct_url_table"),
+            params = {plugin: "xd_ct_url", 'format': 'datatables'};
         if (!this.$dt) {
             this.$dt = $table.DataTable({
                 ajax: {
                     url: url,
-                    data: {plugin: "xd_ct_url", 'format': 'datatables'}
+                    data: params
                 },
                 processing: true,
                 language: {
@@ -59,7 +60,7 @@ $(function () {
                 },
             });
         } else {
-            this.$dt.ajax.reload();
+            this.$dt.ajax.url(url).load();
         }
     }
 
