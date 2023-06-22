@@ -1,7 +1,8 @@
 
 <div class="input-group">
   <span class="input-group-prepend">
-    <button type="button" class="btn btn-secondary {{ widget.name }} xd_content_url_sel_btn" data-url="{% url "xadmin:xd_content_url" %}">
+    <button type="button" class="btn btn-secondary {{ widget.name }} xd_content_url_sel_btn"
+            data-for_name="{{ widget.name }}" data-url="{% url "xadmin:xd_content_url" %}">
       <i class="fa fa-external-link" aria-hidden="true"></i> Selecionar
     </button>
   </span>
