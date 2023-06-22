@@ -33,8 +33,8 @@ $(function () {
         }).done(function (html) {
             modal.body_content(html);
             var $form = modal.$modal.find("form.xdm_ct_url_form"),
-                load_table = $.proxy(self.ajax_table, self);
-            $form.find("button.btn-content-select").click(load_table);
+                ajax_table = $.proxy(self.ajax_table, self);
+            $form.find("button.btn-content-select").click(ajax_table);
         }).fail(function () {
             modal.body_content("Fail!");
         });
