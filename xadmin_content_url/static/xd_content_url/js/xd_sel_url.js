@@ -65,6 +65,10 @@ $(function () {
                     url: url,
                     data: params
                 },
+                select: {
+                    info: false,
+                    style: 'single'
+                },
                 processing: true,
                 language: {
                     url: $table.data('language-url'),
