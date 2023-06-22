@@ -6,9 +6,9 @@ $(function () {
         });
     }
     Modal.prototype.loading = function () {
-        return this.body_content('<h1 style="text-align:center;"><i class="fa-spinner fa-spin fa fa-large"></i></h1>');
+        return this.set_content('<h1 style="text-align:center;"><i class="fa-spinner fa-spin fa fa-large"></i></h1>');
     }
-    Modal.prototype.body_content = function (html) {
+    Modal.prototype.set_content = function (html) {
         return this.$modal.find(".modal-body").html(html)
     }
 
@@ -33,7 +33,7 @@ $(function () {
         }).done(function (html) {
             self.reload(html);
         }).fail(function () {
-            modal.body_content("Fail!");
+            modal.set_content("Fail!");
         });
         modal.show();
     }
@@ -42,7 +42,7 @@ $(function () {
     ContentUrl.prototype.reload = function (html) {
         var $form, ajax_table,
             modal = this.get_modal();
-        modal.body_content(html);
+        modal.set_content(html);
         ajax_table = $.proxy(this.ajax_table, this);
         $form = modal.$modal.find("form.xdm_ct_url_form");
         $form.find("button.btn-content-select").click(ajax_table);
