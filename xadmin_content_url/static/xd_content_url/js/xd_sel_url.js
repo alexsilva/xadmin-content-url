@@ -25,20 +25,38 @@ $(function () {
         $el.click($.proxy(this.init, this));
     }
     ContentUrl.prototype.init = function () {
-        var modal = this.get_modal();
+        var self= this,
+            modal = this.get_modal();
         modal.loading();
         $.ajax({
             url: this.$el.data('url')
         }).done(function (html) {
             modal.body_content(html);
+            var $form = modal.$modal.find("form.xdm_ct_url_form"),
+                load_table = $.proxy(self.ajax_table, self);
+            $form.find("button.btn-content-select").click(load_table);
         }).fail(function () {
             modal.body_content("Fail!");
         });
-        setTimeout(function (){
-            //$body.html();
-        }, 100);
-
         modal.show();
+    }
+
+    ContentUrl.prototype.ajax_table = function () {
+        var $form = this.modal.$modal.find("form.xdm_ct_url_form"),
+            $sel = $form.find("#id_xdm-content"),
+            content = $sel.val(),
+            url = Urls["xadmin:" + content.replace(".", "_") + "_rest"](),
+            $table = $form.find("table.xdm_ct_url_table");
+        var $dt = $table.DataTable({
+            ajax: {
+                url: url,
+                data: {plugin: "xd_ct_url", 'format': 'datatables'}
+            },
+            processing: true,
+            language: {
+                url: $table.data('language-url'),
+            },
+        });
     }
 
     ContentUrl.prototype.get_modal = function () {

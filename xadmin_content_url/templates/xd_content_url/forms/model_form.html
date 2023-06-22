@@ -1,6 +1,6 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
-<form>
+<form class="{{ form.prefix }}_ct_url_form">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-sm-8">
@@ -8,6 +8,20 @@
       </div>
       <div class="col-sm-2">
         <button type="button" class="btn btn-secondary btn-content-select">{% trans "Search" %}</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table {{ form.prefix }}_ct_url_table" data-language-url="{{ dt_language_url }}">
+           <thead>
+            <tr>
+              <th scope="col" data-data="title" data-orderable="false" data-searchable="false">{% trans "Title" %}</th>
+              <th scope="col" data-data="url">{% trans "Url" %}</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
     </div>
   </div>
