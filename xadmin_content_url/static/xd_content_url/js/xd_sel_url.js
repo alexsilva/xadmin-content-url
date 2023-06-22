@@ -31,14 +31,25 @@ $(function () {
         $.ajax({
             url: this.$el.data('url')
         }).done(function (html) {
-            modal.body_content(html);
-            var $form = modal.$modal.find("form.xdm_ct_url_form"),
-                ajax_table = $.proxy(self.ajax_table, self);
-            $form.find("button.btn-content-select").click(ajax_table);
+            self.reload(html);
         }).fail(function () {
             modal.body_content("Fail!");
         });
         modal.show();
+    }
+
+    /* Initializes the modal and prepares for a new table load */
+    ContentUrl.prototype.reload = function (html) {
+        var $form, ajax_table,
+            modal = this.get_modal();
+        modal.body_content(html);
+        ajax_table = $.proxy(this.ajax_table, this);
+        $form = modal.$modal.find("form.xdm_ct_url_form");
+        $form.find("button.btn-content-select").click(ajax_table);
+        if (this.$dt) {
+            this.$dt.destroy();
+            this.$dt = null;
+        }
     }
 
     ContentUrl.prototype.ajax_table = function () {
@@ -46,7 +57,7 @@ $(function () {
             $sel = $form.find("#id_xdm-content"),
             content = $sel.val(),
             url = Urls["xadmin:" + content.replace(".", "_") + "_rest"](),
-            $table = $form.find("table.xdm_ct_url_table"),
+            $table = $form.find("table.xdm_ct_url_table").removeClass('d-none'),
             params = {plugin: "xd_ct_url", 'format': 'datatables'};
         if (!this.$dt) {
             this.$dt = $table.DataTable({
