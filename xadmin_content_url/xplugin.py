@@ -20,9 +20,11 @@ class XdContentUrlAdminPlugin(BaseAdminPlugin):
 class XdContentUrlAdminRestPlugin(BaseAdminPlugin):
 	xd_content_url_serializer = GenericContentUrlSerializer
 	xd_content_url_rest_param = "xd_ct_url"
+	xd_content_url_enable = True
 
 	def init_request(self, *args, **kwargs):
-		return bool(self.request.GET.get('plugin') == self.xd_content_url_rest_param)
+		return bool(self.xd_content_url_enable and
+		            self.request.GET.get('plugin') == self.xd_content_url_rest_param)
 
 	def get_serializer_class(self, __):
 		serializer_class = self.xd_content_url_serializer
