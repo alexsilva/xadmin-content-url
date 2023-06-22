@@ -7,6 +7,7 @@ from xadmin import sites
 from xadmin.sites import site
 from xadmin.views import ModelAdminView
 from xadmin.views.edit import ModelFormAdminView
+from xadmin_content_url.filters import SearchFilterBackend
 from xadmin_content_url.views import ContentUrlAdminView
 from xadmin_content_url.xplugin import XdContentUrlAdminPlugin, XdContentUrlAdminRestPlugin
 
@@ -29,5 +30,7 @@ class ModelAdminViewRestOptions:
 		backend = rest_framework_datatables.filters.DatatablesFilterBackend
 		if backend not in filter_backends:
 			filter_backends.append(backend)
+		backend = SearchFilterBackend
+		if backend not in filter_backends:
+			filter_backends.append(backend)
 		super().__init__(*args, **kwargs)
-		
