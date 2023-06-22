@@ -47,16 +47,20 @@ $(function () {
             content = $sel.val(),
             url = Urls["xadmin:" + content.replace(".", "_") + "_rest"](),
             $table = $form.find("table.xdm_ct_url_table");
-        var $dt = $table.DataTable({
-            ajax: {
-                url: url,
-                data: {plugin: "xd_ct_url", 'format': 'datatables'}
-            },
-            processing: true,
-            language: {
-                url: $table.data('language-url'),
-            },
-        });
+        if (!this.$dt) {
+            this.$dt = $table.DataTable({
+                ajax: {
+                    url: url,
+                    data: {plugin: "xd_ct_url", 'format': 'datatables'}
+                },
+                processing: true,
+                language: {
+                    url: $table.data('language-url'),
+                },
+            });
+        } else {
+            this.$dt.ajax.reload();
+        }
     }
 
     ContentUrl.prototype.get_modal = function () {
