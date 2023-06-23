@@ -9,8 +9,18 @@ class XdUrl(models.Model):
 	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
 	content_object = GenericForeignKey("content_type", "object_id")
 
+	def _get_object_url(self):
+		# noinspection PyBroadException
+		try:
+			obj = self.content_object
+		except Exception as exc:
+			url = None
+		else:
+			url = obj and obj.get_absolute_url()
+		return url or ''
+
 	def __str__(self):
-		return self.content_object.get_absolute_url()
+		return self._get_object_url()
 
 	class Meta:
 		indexes = [
