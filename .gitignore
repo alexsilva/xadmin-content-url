@@ -7,8 +7,6 @@ __pycache__/
 *.so
 .idea
 
-migrations/
-
 # Distribution / packaging
 .Python
 build/
