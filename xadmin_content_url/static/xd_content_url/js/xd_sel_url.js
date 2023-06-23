@@ -1,24 +1,4 @@
 $(function () {
-    var Modal = function (options) {
-        this.$modal = $("#nunjucks-modal-main").template_render$(options);
-    }
-    Modal.prototype.loading = function () {
-        return this.set_content('<h1 style="text-align:center;"><i class="fa-spinner fa-spin fa fa-large"></i></h1>');
-    }
-    Modal.prototype.find = function (selector){
-        return this.$modal.find(selector)
-    }
-    Modal.prototype.set_content = function (html) {
-        return this.find(".modal-body").html(html)
-    }
-
-    Modal.prototype.show = function () {
-        return this.$modal.modal();
-    }
-    Modal.prototype.appendTo = function (selector) {
-        return this.$modal.appendTo(selector);
-    }
-
     var ContentUrl = function ($el, options) {
         this.$el = $el;
         this.options = options;
@@ -34,7 +14,9 @@ $(function () {
         }).done(function (html) {
             self.reload(html);
         }).fail(function () {
-            modal.set_content("Fail!");
+            var for_name = self.$el.data("for_name"),
+                retry = modal.retry_action(for_name, $.proxy(self.init, self));
+            modal.fail(retry);
         });
         modal.show();
     }
@@ -128,7 +110,7 @@ $(function () {
 
     ContentUrl.prototype.get_modal = function () {
         if (!this.modal) {
-            this.modal = new Modal({
+            this.modal = xadmin.bs_modal({
                 modal: {size: 'modal-lg', id: "xd_content_url_modal"},
                 cancel_button: {
                     'class': 'btn-sm xd_ct_insert',

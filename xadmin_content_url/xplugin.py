@@ -11,7 +11,7 @@ class XdContentUrlAdminPlugin(BaseAdminPlugin):
 		return True
 
 	def get_media(self, media):
-		media += vendor("datatables.css", "datatables.js")
+		media += vendor("datatables.css", "datatables.js", "xadmin.bs.modal.js")
 		media += django_forms.Media(js=[
 			"xd_content_url/js/xd_sel_url.js"
 		], css={
