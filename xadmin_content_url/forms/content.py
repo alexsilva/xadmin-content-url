@@ -1,4 +1,5 @@
 import django.forms as django_forms
+from django.utils.translation import ugettext_lazy as _
 from xadmin.sites import site
 from xadmin.widgets import AdminSelectWidget
 
@@ -20,7 +21,7 @@ def _get_models_choices(admin_site=None):
 
 
 class ContentUrlForm(django_forms.Form):
-	content = django_forms.ChoiceField(label="Conteúdo", widget=AdminSelectWidget)
+	content = django_forms.ChoiceField(label=_("Content"), widget=AdminSelectWidget)
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)

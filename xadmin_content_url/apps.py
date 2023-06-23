@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 class XdContentUrlConfig(AppConfig):
 	"""Config xadmin_content_url"""
 	name = 'xadmin_content_url'
-	verbose_name = _("Content Url")
+	verbose_name = _("Content URL")
 
 	def ready(self):
 		from xadmin_content_url import settings as xd_settings
