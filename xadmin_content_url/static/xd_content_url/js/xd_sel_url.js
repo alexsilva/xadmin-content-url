@@ -58,10 +58,12 @@ $(function () {
     }
     ContentUrl.prototype.ajax_table = function () {
         var $form = this.modal.find("form.xdm_ct_url_form"),
+            $icon = $form.find("button.btn-content-select").find('i'),
             $sel = $form.find("#id_xdm-content"),
             url = this.get_rest_url($sel.val()),
             $table = $form.find("table.xdm_ct_url_table").removeClass('d-none'),
             params = {plugin: "xd_ct_url", 'format': 'datatables'};
+
 
         if (!this.$dt) {
             this.$dt = $table.DataTable({
@@ -77,6 +79,12 @@ $(function () {
                 language: {
                     url: $table.data('language-url'),
                 },
+            });
+            this.$dt.on('preXhr', function () {
+                $icon.addClass("fa-spinner fa-spin mr-2");
+            });
+            this.$dt.on('draw', function () {
+                $icon.removeClass("fa-spinner fa-spin mr-2");
             });
             this.$dt.on('select', $.proxy(this.dt_row_selected, this));
             this.$dt.on('deselect', $.proxy(this.dt_row_deselected, this));
