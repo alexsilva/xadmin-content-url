@@ -20,5 +20,10 @@ def _get_models_choices(admin_site=None):
 
 
 class ContentUrlForm(django_forms.Form):
-	content = django_forms.ChoiceField(label="Conteúdo", choices=_get_models_choices(),
-	                                   widget=AdminSelectWidget)
+	content = django_forms.ChoiceField(label="Conteúdo", widget=AdminSelectWidget)
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		field = self.fields.get('content')
+		if field:
+			field.choices =_get_models_choices()
