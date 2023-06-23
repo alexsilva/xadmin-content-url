@@ -1,6 +1,7 @@
 import django.forms as django_forms
 from xadmin.util import vendor
 from xadmin.views import BaseAdminPlugin
+from xadmin_content_url.filters import SearchFilterBackend
 from xadmin_content_url.serializers.content import GenericContentUrlSerializer
 
 
@@ -21,6 +22,7 @@ class XdContentUrlAdminPlugin(BaseAdminPlugin):
 
 class XdContentUrlAdminRestPlugin(BaseAdminPlugin):
 	xd_content_url_serializer = GenericContentUrlSerializer
+	xd_content_url_search_filter = SearchFilterBackend
 	xd_content_url_rest_param = "xd_ct_url"
 	xd_content_url_enable = True
 
@@ -35,3 +37,11 @@ class XdContentUrlAdminRestPlugin(BaseAdminPlugin):
 			'Meta': type("Meta", (meta, ), {'model': self.model})
 		})
 		return serializer_class
+
+	def filter_queryset(self, queryset, *args, **kwargs):
+		search_filter_backend = self.xd_content_url_search_filter()
+		queryset = search_filter_backend.filter_queryset(
+			self.admin_view.request, queryset,
+			self.admin_view
+		)
+		return queryset
