@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: apps.py:9 register.py:21
-msgid "Content URL"
-msgstr "Conteúdo de URL"
+msgid "URL Content"
+msgstr "URL de Conteúdo"
 
 #: forms/content.py:24
 msgid "Content"
