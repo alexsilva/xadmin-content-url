@@ -3,4 +3,4 @@ include LICENSE
 include MANIFEST.in
 recursive-include xadmin_content_url/locale *
 recursive-include xadmin_content_url/static *
-recursive-include xadmin_content_url/xd_content_url/templates *
+recursive-include xadmin_content_url/templates *
