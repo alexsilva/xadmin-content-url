@@ -64,6 +64,7 @@ $(function () {
         return this.modal.find("form.xdm_ct_url_form #id_xdm-content").val();
     }
 
+    /* Mount the url to the initial form */
     ContentUrl.prototype.get_rest_url = function (model_label) {
         var url;
         if (window.Urls) {
