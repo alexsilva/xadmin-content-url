@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-23 15:24-0300\n"
+"POT-Creation-Date: 2023-06-26 15:17-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,30 +18,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: apps.py:9 register.py:21
-msgid "URL Content"
-msgstr "URL de Conteúdo"
+#: apps.py:9 models.py:46
+msgid "Content URL"
+msgstr "URL de conteúdo"
 
 #: forms/content.py:24
 msgid "Content"
 msgstr "Conteúdo"
 
-#: models.py:22
+#: models.py:26 templates/xd_content_url/forms/model_form.html:23
+msgid "URL"
+msgstr "URL"
+
+#: models.py:33
 msgid "created at"
 msgstr "criado em"
 
-#: models.py:23
+#: models.py:34
 msgid "updated at"
 msgstr "atualizado em"
 
-#: templates/xd_content_url/forms/model_form.html:10
+#: register.py:21
+msgid "URL Content"
+msgstr "URL de conteúdo"
+
+#: templates/xd_content_url/forms/model_form.html:11
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/xd_content_url/forms/model_form.html:20
+#: templates/xd_content_url/forms/model_form.html:22
 msgid "Title"
 msgstr "Título"
-
-#: templates/xd_content_url/forms/model_form.html:21
-msgid "Url"
-msgstr "Url"
