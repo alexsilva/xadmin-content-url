@@ -23,6 +23,7 @@ class XdUrl(models.Model):
 		return self._get_object_url()
 
 	class Meta:
+		verbose_name = _("URL")
 		indexes = [
 			models.Index(fields=["content_type", "object_id"]),
 		]
@@ -42,6 +43,7 @@ class XdContentUrl(models.Model):
 		return str(self.url)
 
 	class Meta:
+		verbose_name = _("Content URL")
 		indexes = [
 			models.Index(fields=["content_type", "object_id"]),
 		]
