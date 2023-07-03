@@ -1,7 +1,7 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 <form class="{{ form.prefix }}_ct_url_form">
-    <div class="card bg-secondary p-4">
+    <div class="card {{ form.prefix }}_ct_url_form_fields_wrapper bg-secondary p-3 mb-2">
         <div class="row mb-n3">
             <div class="col-md-auto flex-fill">
                 {% crispy form %}
@@ -13,9 +13,9 @@
             </div>
         </div>
     </div>
-
-    <div class="table-responsive">
-        <table class="d-none table {{ form.prefix }}_ct_url_table" data-server-side="true" data-language-url="{{ dt_language_url }}">
+    <div class="card {{ form.prefix }}_ct_url_table_wrapper d-none bg-secondary p-3">
+      <div class="table-responsive">
+        <table class="d-none table table-bordered table-striped table-hover {{ form.prefix }}_ct_url_table" data-server-side="true" data-language-url="{{ dt_language_url }}">
            <thead>
             <tr>
               <th scope="col" class="d-none" data-data="id" data-visible="false" data-orderable="false" data-searchable="false">#</th>
@@ -26,4 +26,5 @@
           <tbody></tbody>
         </table>
       </div>
+    </div>
 </form>

@@ -38,6 +38,9 @@ $(function () {
     ContentUrl.prototype.get_btn_insert = function () {
         if (!this.$btnInsert) {
             this.$btnInsert = this.modal.find("button.xd_ct_insert");
+            this.$btnInsert.attr("data-dismiss", function (_, value) {
+                return value !== undefined ? value : 'modal';
+            });
         }
         return this.$btnInsert
     }
@@ -68,12 +71,16 @@ $(function () {
             $icon = $form.find("button.btn-content-select").find('i'),
             $sel = $form.find("#id_xdm-content"),
             url = this.get_rest_url($sel.val()),
+            $table_wrapper = $form.find(".xdm_ct_url_table_wrapper").removeClass('d-none'),
             $table = $form.find("table.xdm_ct_url_table").removeClass('d-none'),
             params = {plugin: "xd_ct_url", 'format': 'datatables'};
 
 
         if (!this.$dt) {
             this.$dt = $table.DataTable({
+                	dom: "<'row align-items-center'<'col-sm-12 col-md-6 p-1'l><'col-sm-12 col-md-6 p-1'f>>"
+                        + "<'row'<'col-sm-12'tr>>"
+                        + "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 ajax: {
                     url: url,
                     data: params
@@ -128,7 +135,8 @@ $(function () {
             this.modal = xadmin.bs_modal({
                 header: {tag: 'h5', title: gettext("URL Content")},
                 modal: {size: 'modal-lg', id: "xd_content_url_modal"},
-                cancel_button: {
+                cancel_button: {'class': 'd-none'},
+                confirm_button: {
                     'class': 'sticky-bottom xd_ct_insert',
                     'text': gettext("Insert selected")
                 }
