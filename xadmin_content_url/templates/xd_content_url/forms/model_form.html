@@ -1,20 +1,20 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 <form class="{{ form.prefix }}_ct_url_form">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-sm-8">
-        {% crispy form %}
-      </div>
-      <div class="col-sm-2">
-        <button type="button" class="btn btn-secondary btn-content-select">
-          <i class="fa fa-spin" aria-hidden="true"></i>{% trans "Search" %}
-        </button>
-      </div>
+    <div class="card bg-secondary p-4">
+        <div class="row mb-n3">
+            <div class="col-md-auto flex-fill">
+                {% crispy form %}
+            </div>
+            <div class="col-md-auto">
+                <button type="button" class="btn btn-secondary btn-content-select">
+                    <i class="fa fa-spin" aria-hidden="true"></i>{% trans "Search" %}
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div class="row">
-      <div class="table-responsive">
+    <div class="table-responsive">
         <table class="d-none table {{ form.prefix }}_ct_url_table" data-server-side="true" data-language-url="{{ dt_language_url }}">
            <thead>
             <tr>
@@ -26,6 +26,4 @@
           <tbody></tbody>
         </table>
       </div>
-    </div>
-  </div>
 </form>

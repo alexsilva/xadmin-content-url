@@ -42,6 +42,13 @@ $(function () {
         return this.$btnInsert
     }
 
+    ContentUrl.prototype.get_modal_footer = function () {
+        if (!this.$modalFooter) {
+            this.$modalFooter = this.modal.find(".modal-footer");
+        }
+        return this.$modalFooter
+    }
+
     ContentUrl.prototype.get_selection = function () {
         return this.modal.find("form.xdm_ct_url_form #id_xdm-content").val();
     }
@@ -119,12 +126,16 @@ $(function () {
     ContentUrl.prototype.get_modal = function () {
         if (!this.modal) {
             this.modal = xadmin.bs_modal({
+                header: {tag: 'h5', title: gettext("URL Content")},
                 modal: {size: 'modal-lg', id: "xd_content_url_modal"},
                 cancel_button: {
-                    'class': 'btn-sm xd_ct_insert',
+                    'class': 'sticky-bottom xd_ct_insert',
                     'text': gettext("Insert selected")
                 }
             });
+
+            this.get_modal_footer().addClass('sticky-bottom');
+
             this.modal.appendTo('body');
             var $btn = this.get_btn_insert().prop("disabled", true);
             $btn.click($.proxy(this.insert, this));
