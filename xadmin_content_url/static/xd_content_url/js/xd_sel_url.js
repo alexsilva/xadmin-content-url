@@ -133,7 +133,7 @@ $(function () {
     ContentUrl.prototype.get_modal = function () {
         if (!this.modal) {
             this.modal = xadmin.bs_modal({
-                header: {tag: 'h5', title: gettext("URL Content")},
+                header: {tag: 'h5', title: gettext("Content URL")},
                 modal: {size: 'modal-lg', id: "xd_content_url_modal"},
                 cancel_button: {'class': 'd-none'},
                 confirm_button: {
