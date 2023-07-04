@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils.encoding import force_str
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -17,7 +18,7 @@ class XdUrl(models.Model):
 			url = None
 		else:
 			url = obj and obj.get_absolute_url()
-		return url or ''
+		return force_str(url or '')
 
 	def __str__(self):
 		return self._get_object_url()
