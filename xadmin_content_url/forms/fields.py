@@ -7,9 +7,10 @@ from xadmin_content_url.forms import widgets
 class XdContentUrlField(django_forms.Field):
 	widget = widgets.XdContentUrlInput
 
-	def __init__(self, *args, empty_value='', **kwargs):
+	def __init__(self, *args, empty_value=None, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.empty_value = empty_value
+		if empty_value is None:
+			self.empty_value = []
 
 	def to_python(self, value):
 		if value in self.empty_values:

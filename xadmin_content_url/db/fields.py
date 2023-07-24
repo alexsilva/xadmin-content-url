@@ -25,7 +25,7 @@ class XdContentUrlField(GenericRelation):
 
 	def save_form_data(self, instance, data: list):
 		"""data: [(object_id, content_type),...]"""
-		if not data:
+		if data is None:
 			return
 		objs = []
 		for item in data:
