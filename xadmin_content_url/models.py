@@ -1,8 +1,34 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.urls import reverse, NoReverseMatch
 from django.utils.encoding import force_str
 from django.utils.translation import ugettext_lazy as _
+
+
+class XdSiteViewUrl(models.Model):
+	ref = models.CharField(verbose_name=_("Ref"), max_length=256,
+	                       unique=True, editable=False)
+	name = models.CharField(verbose_name=_("Name"), max_length=256)
+	view_name = models.CharField(verbose_name=_("URL name"), max_length=350)
+
+	def get_absolute_url(self):
+		try:
+			return reverse(self.view_name)
+		except NoReverseMatch:
+			return
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		indexes = [
+			models.Index(fields=['name']),
+			models.Index(fields=['view_name']),
+			models.Index(fields=['ref'])
+		]
+		verbose_name = _("Site view")
+		verbose_name_plural = _("Site views")
 
 
 class XdUrl(models.Model):
