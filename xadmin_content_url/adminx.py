@@ -14,5 +14,6 @@ site.register_view("^xd-content-url/", ContentUrlAdminView, 'xd_content_url')
 @register(XdSiteViewUrl)
 class XdSiteViewOptions:
 	xd_content_url_enable = True
+	xd_content_search_fields = ('name',)
 	hidden_menu = True
 
