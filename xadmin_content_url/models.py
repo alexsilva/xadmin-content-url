@@ -22,6 +22,7 @@ class XdSiteViewUrl(models.Model):
 		return self.name
 
 	class Meta:
+		ordering = ("name",)
 		indexes = [
 			models.Index(fields=['name']),
 			models.Index(fields=['view_name']),
@@ -70,6 +71,7 @@ class XdContentUrl(models.Model):
 		return str(self.url)
 
 	class Meta:
+		ordering = ("content_type",)
 		verbose_name = _("Content URL")
 		indexes = [
 			models.Index(fields=["content_type", "object_id"]),
