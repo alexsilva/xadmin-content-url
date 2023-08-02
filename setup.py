@@ -7,6 +7,7 @@ setup(
 		'xadmin_content_url',
 		'xadmin_content_url.db',
 		'xadmin_content_url.migrations',
+		'xadmin_content_url.management',
 		'xadmin_content_url.forms',
 		'xadmin_content_url.serializers'
 	],
