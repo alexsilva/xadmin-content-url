@@ -42,6 +42,5 @@ class Command(BaseCommand):
 			if update_count > 0:
 				print(f"Updated {update_count} objs...", file=sys.stdout)
 
-		if self.site_view_auto_remove_setting:
-			removed = self.remove_unregistered()
+		if self.site_view_auto_remove_setting and (removed := self.remove_unregistered()):
 			print(f"Removed {len(removed)} objs...")
