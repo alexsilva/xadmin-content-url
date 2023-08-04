@@ -1,4 +1,5 @@
 import django.forms as django_forms
+from django.core.exceptions import PermissionDenied
 from xadmin.util import vendor
 from xadmin.views import BaseAdminPlugin
 from xadmin_content_url.filters import SearchFilterBackend
@@ -29,8 +30,11 @@ class XdContentUrlAdminRestPlugin(BaseAdminPlugin):
 	xd_content_url_enable = True
 
 	def init_request(self, *args, **kwargs):
-		return bool(self.xd_content_url_enable and
-		            self.request.GET.get('plugin') == self.xd_content_url_rest_param)
+		is_active = bool(self.xd_content_url_enable and self.request.GET.get('plugin') == self.xd_content_url_rest_param)
+		# The plugin is read-only because the permissions have been rewritten.
+		if is_active and self.admin_view.request_method not in ['get', 'options', 'head']:
+			raise PermissionDenied('read only')
+		return is_active
 
 	def get_permissions(self, __):
 		"""Validates only list permissions"""
