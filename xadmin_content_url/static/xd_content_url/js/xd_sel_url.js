@@ -2,6 +2,10 @@ $(function () {
     var ContentUrl = function ($el, options) {
         this.$el = $el;
         this.options = options;
+        this.icons = {
+            loading: "fa fa-spin fa-spinner mr-2",
+            error: "fa fa-exclamation-triangle mr-2",
+        }
         $el.click($.proxy(this.init, this));
     }
     ContentUrl.prototype.init = function () {
@@ -67,7 +71,8 @@ $(function () {
         return url;
     }
     ContentUrl.prototype.ajax_table = function () {
-        var $form = this.modal.find("form.xdm_ct_url_form"),
+        var self = this,
+            $form = this.modal.find("form.xdm_ct_url_form"),
             $icon = $form.find("button.btn-content-select").find('i'),
             $sel = $form.find("#id_xdm-content"),
             url = this.get_rest_url($sel.val()),
@@ -83,7 +88,13 @@ $(function () {
                         + "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 ajax: {
                     url: url,
-                    data: params
+                    data: params,
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        var data = (jqXHR.responseJSON || {}).data;
+                        $icon.removeClass(self.icons.loading);
+                        $icon.addClass(self.icons.error);
+                        $icon.attr("title", data.detail || textStatus || '');
+                    },
                 },
                 select: {
                     info: false,
@@ -95,10 +106,10 @@ $(function () {
                 },
             });
             this.$dt.on('preXhr', function () {
-                $icon.addClass("fa-spinner fa-spin mr-2");
+                $icon.addClass(self.icons.loading);
             });
             this.$dt.on('draw', function () {
-                $icon.removeClass("fa-spinner fa-spin mr-2");
+                $icon.removeClass(self.icons.loading);
             });
             this.$dt.on('select', $.proxy(this.dt_row_selected, this));
             this.$dt.on('deselect', $.proxy(this.dt_row_deselected, this));
