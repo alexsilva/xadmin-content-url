@@ -8,8 +8,10 @@ setup(
 		'xadmin_content_url.db',
 		'xadmin_content_url.migrations',
 		'xadmin_content_url.management',
+		'xadmin_content_url.management.commands',
+		'xadmin_content_url.rest',
+		'xadmin_content_url.rest.serializers',
 		'xadmin_content_url.forms',
-		'xadmin_content_url.rest'
 	],
 	url='https://github.com/alexsilva/xadmin-content-url',
 	include_package_data=True,
