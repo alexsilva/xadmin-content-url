@@ -90,10 +90,11 @@ $(function () {
                     url: url,
                     data: params,
                     error: function (jqXHR, textStatus, errorThrown) {
-                        var data = (jqXHR.responseJSON || {}).data;
+                        var data = (jqXHR.responseJSON || {}).data,
+                            text = textStatus || '';
                         $icon.removeClass(self.icons.loading);
                         $icon.addClass(self.icons.error);
-                        $icon.attr("title", data.detail || textStatus || '');
+                        $icon.attr("title", data ? data.detail || text: text);
                     },
                 },
                 select: {
@@ -106,10 +107,10 @@ $(function () {
                 },
             });
             this.$dt.on('preXhr', function () {
-                $icon.addClass(self.icons.loading);
+                $icon.addClass(self.icons.loading).removeAttr("title");
             });
             this.$dt.on('draw', function () {
-                $icon.removeClass(self.icons.loading);
+                $icon.removeClass(self.icons.loading).removeClass(self.icons.error);
             });
             this.$dt.on('select', $.proxy(this.dt_row_selected, this));
             this.$dt.on('deselect', $.proxy(this.dt_row_deselected, this));
