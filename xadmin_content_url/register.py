@@ -2,13 +2,13 @@
 import warnings
 from django.utils.translation import ugettext_lazy as _
 from django.apps import apps
-from xadmin_content_url import settings
 from xadmin_content_url.db.fields import XdContentUrlField
 from xadmin_content_url.models import XdContentUrl
 
 
 def register_models(*models):
 	"""Registers models that receive urls"""
+	from xadmin_content_url import settings
 	for model in models:
 		try:
 			app_label, model_name = model.split(".", 1)

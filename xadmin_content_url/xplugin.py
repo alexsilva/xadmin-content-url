@@ -2,7 +2,8 @@ import django.forms as django_forms
 from xadmin.util import vendor
 from xadmin.views import BaseAdminPlugin
 from xadmin_content_url.filters import SearchFilterBackend
-from xadmin_content_url.serializers.content import GenericContentUrlSerializer
+from xadmin_content_url.rest.permissions import HasContentUrlPermission
+from xadmin_content_url.rest.serializers.content import GenericContentUrlSerializer
 
 
 class XdContentUrlAdminPlugin(BaseAdminPlugin):
@@ -23,12 +24,17 @@ class XdContentUrlAdminPlugin(BaseAdminPlugin):
 class XdContentUrlAdminRestPlugin(BaseAdminPlugin):
 	xd_content_url_serializer = GenericContentUrlSerializer
 	xd_content_url_search_filter = SearchFilterBackend
+	xd_content_urls_permissions = [HasContentUrlPermission]
 	xd_content_url_rest_param = "xd_ct_url"
 	xd_content_url_enable = True
 
 	def init_request(self, *args, **kwargs):
 		return bool(self.xd_content_url_enable and
 		            self.request.GET.get('plugin') == self.xd_content_url_rest_param)
+
+	def get_permissions(self, __):
+		"""Validates only list permissions"""
+		return [permission() for permission in self.xd_content_urls_permissions]
 
 	def get_serializer_class(self, __):
 		serializer_class = self.xd_content_url_serializer
