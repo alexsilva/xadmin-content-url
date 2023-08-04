@@ -9,7 +9,7 @@ setup(
 		'xadmin_content_url.migrations',
 		'xadmin_content_url.management',
 		'xadmin_content_url.forms',
-		'xadmin_content_url.serializers'
+		'xadmin_content_url.rest'
 	],
 	url='https://github.com/alexsilva/xadmin-content-url',
 	include_package_data=True,
