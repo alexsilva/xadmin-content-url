@@ -32,7 +32,9 @@ class XdContentUrlField(GenericRelation):
 			obj = self.xd_save_form_data(instance, *item)
 			objs.append(obj.pk)
 			break
-		self.remote_field.model.objects.exclude(pk__in=objs).delete()
+
+		self.remote_field.model.objects.filter(content_type=ContentType.objects.get_for_model(instance),
+											   object_id=instance.pk).exclude(pk__in=objs).delete()
 
 	def value_from_object(self, obj):
 		"""Return the value of this field in the given model instance."""
