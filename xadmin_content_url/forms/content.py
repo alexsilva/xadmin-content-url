@@ -1,5 +1,5 @@
 import django.forms as django_forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from xadmin.sites import site
 from xadmin.widgets import AdminSelectWidget
 

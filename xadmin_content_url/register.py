@@ -1,6 +1,6 @@
 # coding=utf-8
 import warnings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.apps import apps
 from xadmin_content_url.db.fields import XdContentUrlField
 from xadmin_content_url.models import XdContentUrl
