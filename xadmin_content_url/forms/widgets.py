@@ -1,4 +1,5 @@
 from django.forms import TextInput
+from xadmin_content_url.models import XdUrl
 
 
 class XdContentUrlInput(TextInput):
@@ -6,20 +7,19 @@ class XdContentUrlInput(TextInput):
 	template_name = "xd_content_url/forms/widgets/url.html"
 
 	@staticmethod
-	def simple_model_format(qs):
+	def simple_model_format(data: list[XdUrl]):
 		items = []
-		if not qs:
+		if not data:
 			return ''
-		for obj in qs:
-			url = obj.url
+		for url in data:
 			items.append(f"{url.content_type.app_label}:{url.content_type.model}:{url.object_id}")
 		return ','.join(items)
 
 	@staticmethod
-	def simple_model_string(qs):
-		if not qs:
+	def simple_model_string(data: list[XdUrl]):
+		if not data:
 			return ''
-		items = [str(o) for o in qs]
+		items = [str(o) for o in data]
 		return ','.join(items)
 
 	def get_context(self, name, value, attrs):

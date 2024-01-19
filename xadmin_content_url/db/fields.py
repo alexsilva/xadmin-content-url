@@ -23,13 +23,13 @@ class XdContentUrlField(GenericRelation):
 		)[0]
 		return obj
 
-	def save_form_data(self, instance, data: list):
+	def save_form_data(self, instance, data: list[XdUrl]):
 		"""data: [(object_id, content_type),...]"""
 		if data is None:
 			return
 		objs = []
-		for item in data:
-			obj = self.xd_save_form_data(instance, *item)
+		for url in data:
+			obj = self.xd_save_form_data(instance, url.object_id, url.content_type)
 			objs.append(obj.pk)
 			break
 
@@ -38,7 +38,7 @@ class XdContentUrlField(GenericRelation):
 
 	def value_from_object(self, obj):
 		"""Return the value of this field in the given model instance."""
-		return super().value_from_object(obj).all()
+		return [o.url for o in super().value_from_object(obj).all()]
 
 	def formfield(self, **kwargs):
 		defaults = {
