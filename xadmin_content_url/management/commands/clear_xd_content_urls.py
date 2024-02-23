@@ -19,6 +19,7 @@ class Command(BaseCommand):
 				else:
 					label_lower = None
 			except Exception as exc:
+				print(f"ModelClass error: '{exc}'", file=sys.stderr)
 				label_lower = None
 
 			if label_lower is None or label_lower not in url_for_models:
