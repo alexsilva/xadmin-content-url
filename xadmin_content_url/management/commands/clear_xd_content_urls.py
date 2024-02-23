@@ -25,4 +25,3 @@ class Command(BaseCommand):
 			if label_lower is None or label_lower not in url_for_models:
 				print(f"Remove [{label_lower}] {instance}", file=sys.stdout)
 				instance.delete()
-				instance.url.delete()
