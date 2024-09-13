@@ -18,7 +18,11 @@ class ContentUrlAdminView(BaseAdminView):
 
 	def get_context(self):
 		ctx = super().get_context()
-		ctx['dt_language_url'] = xstatic("datatables.lang")[0]
+		try:
+			language_url = xstatic("datatables.lang")[0]
+		except ValueError:
+			language_url = ''  # en locale
+		ctx['dt_language_url'] = language_url
 		return ctx
 
 	def get(self, request, **kwargs):
